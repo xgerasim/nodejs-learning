@@ -11,8 +11,11 @@ const port = process.env.PORT || 8000;
 const router = Router();
 const app = express();
 
+
 app.set('view engine', 'ejs');
 app.set('views', './source/templates');
+
+app.locals.appTitle = process.env.APP_TITLE || 'Express';
 
 app.use(router);
 
