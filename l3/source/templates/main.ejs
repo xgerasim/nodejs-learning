@@ -1,20 +1,22 @@
-<html lang="en">
+<%- include('includes/header.ejs') %>
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Главная</title>
-</head>
 
-<body>
-    <h1>Запланированные дела</h1>
+    <h1 style="margin-top: 35px;">Запланированные дела</h1>
 
     <% for (let t of todos) { %>
-        <h2>
-            <%= t.title %>
-        </h2>
+
+        <article class="card">
+            <header>
+                <h2><a href="<%= t._id %>">
+                        <%= t.title %>
+                    </a></h2>
+            </header>
+            <footer>
+                <%=t.desc %>
+            </footer>
+        </article>
         <% } %>
 
-</body>
+            </body>
 
-</html>
+            </html>
