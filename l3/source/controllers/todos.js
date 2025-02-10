@@ -1,25 +1,27 @@
 import { getList, getItem } from '../models/todos.js';
 
 function mainPage(req, res) {
-    const list = getList();
+    let list = getList();
+
+    if (req.query.search) {
+        const q = req.query.search.toLowerCase();
+        list = list.filter((el) => {
+            if (el.title.toLowerCase().includes(q)) {
+                return true;
+            } else {
+                if (el.desc) {
+                    return el.desc.toLowerCase().includes(q);
+                } else {
+                    return false;
+                }
+            }
+        })
+    };
+
     res.render('main', {
         todos: list,
         title: 'Главная'
     });
-    // let s = '<!doctype html>' +
-    //     '<html>' +
-    //     '<head>' +
-    //     '<meta charset="UTF-8">' +
-    //     '<title>Главная</title>' +
-    //     '</head>' +
-    //     '<body>' +
-    //     '<h1>Мои дела</h1>';
-    // for (let t of list) {
-    //     s += `<h2>${t.title}</h2>`
-    // };
-
-    // s += '</body>' + '</html>';
-    // res.send(s);
 }
 
 function detailPage(req, res) {
